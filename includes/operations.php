@@ -37,3 +37,8 @@ function newHabit(Habit $habit, array $data){
     $habits = $habit->addHabit($data);
     return json_encode($habits);
 }
+
+function getUserRanking(User $user){
+    $users = $user->getAllUsers();
+    return json_encode($users);
+}

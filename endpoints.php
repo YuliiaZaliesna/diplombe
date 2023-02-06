@@ -72,6 +72,10 @@ if (isset($data['action'])){
             $habit = new Habit($database);
             echo newHabit($habit, $action['data']);
             break;
+        case 'allUsers':
+            $user = new User($database);
+            echo getUserRanking($user);
+            break;
         default:
             echo json_encode($wrongMessage);
             break;

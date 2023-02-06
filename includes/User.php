@@ -90,4 +90,9 @@ class User
     public function getSaveData(){
         return array_intersect_key($this->userData, array_flip($this->saveKeys));
     }
+
+    public function getAllUsers(){
+        $users = $this->database->resultSet("SELECT loginn, points, poziom FROM uzytkownik ORDER BY points DESC");
+        return $users;
+    }
 }
