@@ -76,13 +76,13 @@ class Habit
     public function addHabit(array $data)
     {
         //TODO MD5 PASSWORD
-        $queryParameters = array(':id'=>$_SESSION['id'], ':nawyki_id'=>$data['nawykiID'], ':dzien'=>$data['dzien']);
-        $habits = $this->database->single("SELECT * FROM wybrane_nawyki WHERE nawyki_id=:nawyki_id AND data_rozpoczecia=:dzien AND uzytkownik_id=:id", $queryParameters) || [];
+        $queryParameters = array(':id'=>$_SESSION['id'], ':nawyki_id'=>$data['nawykiID'], ':dzien'=>$data['dzien'], ':ilosc_dni'=>$data['dlugosc']);
+        $habits = $this->database->single("SELECT * FROM wybrane_nawyki WHERE nawyki_id=:nawyki_id AND data_rozpoczecia=:dzien AND uzytkownik_id=:id AND ilosc_dni=:ilosc_dni", $queryParameters) || [];
         if(gettype($habits) == 'array'){
                 return "This habit is already added";
         }
         try {
-            $insertedID = $this->database->insert('INSERT INTO wybrane_nawyki (uzytkownik_id, nawyki_id, data_rozpoczecia) VALUES (:id, :nawyki_id, :dzien)', $queryParameters);
+            $insertedID = $this->database->insert('INSERT INTO wybrane_nawyki (uzytkownik_id, nawyki_id, data_rozpoczecia, ilosc_dni) VALUES (:id, :nawyki_id, :dzien, :ilosc_dni)', $queryParameters);
         } catch (Exception $e) {
             return $e->getMessage();
         }
